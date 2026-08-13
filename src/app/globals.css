@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/**
+ * 设计 Token（色彩 / 字体 / 圆角 / 阴影 / 断点）。
+ * 配色参考主站 expectaly.com 的视觉语言（暖白背景、墨色文字、低饱和深青绿强调色），
+ * 保持「意料之中」品牌体系的视觉连贯性，同时符合本项目「克制、编辑式、精品买手店」的定位：
+ * 不使用大面积阴影、不使用胶囊按钮、圆角保持极小。
+ */
+@theme {
+  /* ---- 色彩：中性色阶（背景、表面、边框） ---- */
+  --color-paper: #f8fafb; /* 页面背景：暖白灰 */
+  --color-surface: #ffffff; /* 卡片/表面背景 */
+  --color-surface-muted: #f2f4f6; /* 次级表面背景（如输入框、标签底色） */
+  --color-line: #e5e7eb; /* 默认边框/分隔线 */
+  --color-line-strong: #d8dee6; /* 强调边框/分隔线 */
+
+  /* ---- 色彩：文字 ---- */
+  --color-ink: #17202b; /* 主文字 */
+  --color-ink-muted: #606a78; /* 次要文字 */
+  /* 弱化文字（占位符、辅助说明）。原 #9aa3af 对 paper/白底/surface-muted 对比度仅 1.9~2.6:1，
+     不满足 WCAG AA 正文最低 4.5:1 要求（Stage 09 axe-core 扫描发现），
+     调整为同色相更深的 #65707d（对 surface-muted 4.57:1 / paper 4.81:1 / 白底 5.04:1，均通过 AA，且与 ink-muted 保持可辨识的层级差异）。 */
+  --color-ink-faint: #65707d;
+
+  /* ---- 色彩：品牌强调色（低饱和深青绿，克制使用） ---- */
+  --color-brand-50: #edf6f3;
+  --color-brand-100: #d6ebe4;
+  --color-brand-200: #b3d9cd;
+  --color-brand-600: #29695a;
+  --color-brand-700: #1f5f52;
+  --color-brand-900: #203c36;
+
+  /* ---- 色彩：语义状态色（与主站保持一致：已核实=绿、需核对=琥珀、高风险=红） ---- */
+  --color-success-50: #edf6f3;
+  --color-success-200: #b3d9cd;
+  --color-success-700: #1f5f52;
+  --color-warning-50: #fffbeb;
+  --color-warning-200: #fde68a;
+  --color-warning-900: #451a03;
+  --color-danger-50: #fef2f2;
+  --color-danger-200: #fecaca;
+  --color-danger-900: #7f1d1d;
+
+  /* ---- 字体 ----
+   * 中文/正文沿用系统无衬线字体栈（与主站一致，避免下载大体积 CJK 字重包）；
+   * 英文标题/价格数字使用 next/font 加载的衬线字体（Source Serif 4），
+   * 通过 --font-serif-override 变量注入，未加载时回退到系统衬线字体。
+   */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei",
+    "Segoe UI", Roboto, Arial, sans-serif;
+  --font-serif: var(--font-serif-override, Georgia, "Times New Roman", serif);
+
+  /* ---- 圆角：保持极小，不使用胶囊按钮/大圆角卡片 ---- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  /* ---- 阴影：仅用于浮层（下拉菜单/弹层/抽屉），卡片本身不使用阴影 ---- */
+  --shadow-overlay: 0 8px 24px -8px rgb(23 32 43 / 0.16);
+
+  /* ---- 断点：在 Tailwind 默认基础上补充设计规范要求的临界宽度 ---- */
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ---- 页面容器最大宽度 ---- */
+  --container-page: 1440px;
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-brand-700);
+  outline-offset: 2px;
+}
