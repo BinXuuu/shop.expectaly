@@ -33,7 +33,7 @@ export default async function LoginPage({
     <PageContainer className="max-w-md py-16">
       <h1 className="text-ink font-serif text-2xl font-semibold">登录</h1>
       <p className="text-ink-muted mt-2 text-sm">
-        第一期使用开发环境模拟登录，未来将接入 Supabase Auth 与 expectaly.com 主站账号互通。
+        与 expectaly.com 主站账号互通，可直接使用主站的邮箱和密码登录。
       </p>
       <div className="mt-8">
         <LoginForm
